@@ -221,11 +221,6 @@ namespace EventManager
                 DataTable dt = DbHelper.ExecuteQuery("SELECT * FROM events ORDER BY event_date DESC");
                 dgvEventsAdmin.DataSource = dt;
 
-                // Detach event handlers first to avoid null binding issues
-                cmbRegEvents.SelectedIndexChanged -= (s, e) => LoadRegistrations();
-                cmbAttEvents.SelectedIndexChanged -= (s, e) => LoadAttendance();
-                cmbAnaEvents.SelectedIndexChanged -= (s, e) => LoadAnalytics();
-
                 // Bind dropdowns if there are events
                 if (dt.Rows.Count > 0)
                 {
@@ -284,10 +279,11 @@ namespace EventManager
         private void LoadAttendance()
         {
             if (cmbAttEvents.SelectedValue == null) return;
+            // Only fetch pending attendance to avoid re-approving
             string query = @"SELECT a.id as AttendanceID, att.first_name, att.last_name, att.email, a.status
                              FROM attendance a
                              JOIN attendees att ON a.attendee_id = att.id
-                             WHERE a.event_id = @e";
+                             WHERE a.event_id = @e AND a.status = 'Pending'";
             dgvAttendance.DataSource = DbHelper.ExecuteQuery(query, new MySqlParameter("@e", cmbAttEvents.SelectedValue));
             picProofViewer.Image = null;
         }
@@ -301,8 +297,11 @@ namespace EventManager
                 if (dt.Rows.Count > 0 && dt.Rows[0]["proof_image"] != DBNull.Value)
                 {
                     byte[] imgBytes = (byte[])dt.Rows[0]["proof_image"];
-                    MemoryStream ms = new MemoryStream(imgBytes);
-                    picProofViewer.Image = Image.FromStream(ms);
+                    using (MemoryStream ms = new MemoryStream(imgBytes))
+                    {
+                        Image originalImage = Image.FromStream(ms);
+                        picProofViewer.Image = new Bitmap(originalImage);
+                    }
                 }
                 else
                 {

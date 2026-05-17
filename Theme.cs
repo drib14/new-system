@@ -38,6 +38,7 @@ namespace EventManager
                 btn.ForeColor = Color.White;
                 btn.Cursor = Cursors.Hand;
                 btn.Font = new Font("Segoe UI Semibold", 10F);
+                btn.Padding = new Padding(5);
 
                 // Keep specific colors if already set
                 if (btn.Text.Contains("Reject") || btn.Text.Contains("Delete")) btn.BackColor = DangerColor;

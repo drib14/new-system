@@ -25,7 +25,7 @@ namespace EventManager
             // lblTitle
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point);
-            this.lblTitle.Location = new Point(135, 40);
+            this.lblTitle.Location = new Point(50, 40); // Shifted to left slightly for better reading
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new Size(528, 54);
             this.lblTitle.TabIndex = 0;
@@ -77,10 +77,17 @@ namespace EventManager
             this.Name = "MainForm";
             this.StartPosition = FormStartPosition.CenterScreen;
             this.Text = "Event Management System";
+            this.Resize += new EventHandler(this.MainForm_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
 
             Theme.ApplyToForm(this);
+        }
+
+        private void MainForm_Resize(object? sender, EventArgs e)
+        {
+            btnPublicPortal.Left = (this.ClientSize.Width - btnPublicPortal.Width) / 2;
+            btnAdminLogin.Left = (this.ClientSize.Width - btnAdminLogin.Width) / 2;
         }
 
         private void BtnPublicPortal_Click(object? sender, EventArgs e)
