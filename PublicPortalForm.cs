@@ -69,10 +69,6 @@ namespace EventManager
             this.btnSubmitProof.UseVisualStyleBackColor = true;
             this.btnSubmitProof.Click += new EventHandler(this.BtnSubmitProof_Click);
 
-            // Form Styling
-            this.BackColor = Color.FromArgb(240, 244, 248);
-            this.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-
             // lblTitle
             this.lblTitle.ForeColor = Color.FromArgb(33, 37, 41);
 
@@ -107,6 +103,8 @@ namespace EventManager
             ((System.ComponentModel.ISupportInitialize)(this.dgvEvents)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
+            Theme.ApplyToForm(this);
         }
 
         private void LoadEvents()

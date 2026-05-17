@@ -134,6 +134,8 @@ namespace EventManager
             ((System.ComponentModel.ISupportInitialize)(this.picQRCode)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
+            Theme.ApplyToForm(this);
         }
 
         private void BtnRegister_Click(object? sender, EventArgs e)

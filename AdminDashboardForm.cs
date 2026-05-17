@@ -15,6 +15,10 @@ namespace EventManager
         private TabPage tabRegistrations;
         private TabPage tabAttendance;
         private TabPage tabAnalytics;
+        private TabPage tabStaff;
+        private DataGridView dgvStaff;
+        private TextBox txtStaffUser, txtStaffPass;
+        private Button btnAddStaff;
 
         // Events Tab
         private DataGridView dgvEventsAdmin;
@@ -39,11 +43,13 @@ namespace EventManager
         private Label lblTotalReg;
         private Label lblTotalAtt;
         private Chart chartAges;
+        private Chart chartAttendance;
 
         public AdminDashboardForm()
         {
             InitializeComponent();
             LoadEventsData();
+            LoadStaff();
         }
 
         private void InitializeComponent()
@@ -53,11 +59,13 @@ namespace EventManager
             this.tabRegistrations = new TabPage();
             this.tabAttendance = new TabPage();
             this.tabAnalytics = new TabPage();
+            this.tabStaff = new TabPage();
 
             this.tabControl.Controls.Add(this.tabEvents);
             this.tabControl.Controls.Add(this.tabRegistrations);
             this.tabControl.Controls.Add(this.tabAttendance);
             this.tabControl.Controls.Add(this.tabAnalytics);
+            this.tabControl.Controls.Add(this.tabStaff);
             this.tabControl.Dock = DockStyle.Fill;
 
             // --- Events Tab Setup ---
@@ -116,51 +124,45 @@ namespace EventManager
             cmbAnaEvents = new ComboBox() { Location = new Point(100, 17), Width = 200, DropDownStyle = ComboBoxStyle.DropDownList };
             cmbAnaEvents.SelectedIndexChanged += (s, e) => LoadAnalytics();
 
-            lblTotalReg = new Label() { Location = new Point(10, 60), Width = 300, Font = new Font("Segoe UI", 12, FontStyle.Bold) };
-            lblTotalAtt = new Label() { Location = new Point(10, 100), Width = 300, Font = new Font("Segoe UI", 12, FontStyle.Bold) };
+            lblTotalReg = new Label() { Location = new Point(10, 60), Width = 300, Font = new Font("Segoe UI Light", 16) };
+            lblTotalAtt = new Label() { Location = new Point(10, 100), Width = 300, Font = new Font("Segoe UI Light", 16) };
 
-            chartAges = new Chart() { Location = new Point(330, 20), Width = 500, Height = 400 };
-            ChartArea ca = new ChartArea("MainArea");
-            chartAges.ChartAreas.Add(ca);
-            Series sAges = new Series("Ages") { ChartType = SeriesChartType.Pie };
+            // Attendance Bar Chart
+            chartAttendance = new Chart() { Location = new Point(10, 150), Width = 400, Height = 300 };
+            ChartArea caAtt = new ChartArea("MainArea");
+            chartAttendance.ChartAreas.Add(caAtt);
+            Series sAtt = new Series("Attendance") { ChartType = SeriesChartType.Column };
+            sAtt.IsValueShownAsLabel = true;
+            chartAttendance.Series.Add(sAtt);
+
+            // Demographics Pie Chart
+            chartAges = new Chart() { Location = new Point(450, 60), Width = 450, Height = 390 };
+            chartAges.Titles.Add("Attendee Demographics (Ages)");
+            ChartArea caAges = new ChartArea("MainArea");
+            chartAges.ChartAreas.Add(caAges);
+            Series sAges = new Series("Ages") { ChartType = SeriesChartType.Doughnut };
+            sAges.IsValueShownAsLabel = true;
             chartAges.Series.Add(sAges);
 
             tabAnalytics.Controls.Add(lan); tabAnalytics.Controls.Add(cmbAnaEvents);
             tabAnalytics.Controls.Add(lblTotalReg); tabAnalytics.Controls.Add(lblTotalAtt);
+            tabAnalytics.Controls.Add(chartAttendance);
             tabAnalytics.Controls.Add(chartAges);
 
-            // Form Styling
-            this.BackColor = Color.FromArgb(240, 244, 248);
-            this.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            this.tabControl.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            // --- Staff Tab Setup ---
+            tabStaff.Text = "Manage Staff";
+            Label ls1 = new Label() { Text = "Username:", Location = new Point(10, 20) };
+            txtStaffUser = new TextBox() { Location = new Point(100, 17), Width = 150 };
+            Label ls2 = new Label() { Text = "Password:", Location = new Point(270, 20) };
+            txtStaffPass = new TextBox() { Location = new Point(350, 17), Width = 150, PasswordChar = '*' };
+            btnAddStaff = new Button() { Text = "Add Staff", Location = new Point(520, 15), Width = 100 };
+            btnAddStaff.Click += BtnAddStaff_Click;
 
-            // Buttons
-            this.btnCreateEvent.BackColor = Color.FromArgb(0, 123, 255);
-            this.btnCreateEvent.ForeColor = Color.White;
-            this.btnCreateEvent.FlatStyle = FlatStyle.Flat;
-            this.btnCreateEvent.FlatAppearance.BorderSize = 0;
-            this.btnCreateEvent.Cursor = Cursors.Hand;
+            dgvStaff = new DataGridView() { Location = new Point(10, 60), Width = 920, Height = 400, ReadOnly = true, AllowUserToAddRows = false, SelectionMode = DataGridViewSelectionMode.FullRowSelect };
 
-            this.btnApprove.BackColor = Color.FromArgb(40, 167, 69);
-            this.btnApprove.ForeColor = Color.White;
-            this.btnApprove.FlatStyle = FlatStyle.Flat;
-            this.btnApprove.FlatAppearance.BorderSize = 0;
-            this.btnApprove.Cursor = Cursors.Hand;
-
-            this.btnReject.BackColor = Color.FromArgb(220, 53, 69);
-            this.btnReject.ForeColor = Color.White;
-            this.btnReject.FlatStyle = FlatStyle.Flat;
-            this.btnReject.FlatAppearance.BorderSize = 0;
-            this.btnReject.Cursor = Cursors.Hand;
-
-            // Grids
-            var grids = new[] { dgvEventsAdmin, dgvRegistrations, dgvAttendance };
-            foreach(var g in grids) {
-                g.BackgroundColor = Color.White;
-                g.BorderStyle = BorderStyle.None;
-                g.DefaultCellStyle.SelectionBackColor = Color.FromArgb(0, 123, 255);
-                g.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            }
+            tabStaff.Controls.Add(ls1); tabStaff.Controls.Add(txtStaffUser);
+            tabStaff.Controls.Add(ls2); tabStaff.Controls.Add(txtStaffPass);
+            tabStaff.Controls.Add(btnAddStaff); tabStaff.Controls.Add(dgvStaff);
 
             // Form
             this.ClientSize = new Size(960, 520);
@@ -169,6 +171,47 @@ namespace EventManager
             this.StartPosition = FormStartPosition.CenterScreen;
             this.Text = "Admin Dashboard";
             this.ResumeLayout(false);
+
+            Theme.ApplyToForm(this);
+        }
+
+
+        private void LoadStaff()
+        {
+            try { dgvStaff.DataSource = DbHelper.ExecuteQuery("SELECT id, username FROM admins"); }
+            catch { }
+        }
+
+        private void BtnAddStaff_Click(object? sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtStaffUser.Text) || string.IsNullOrWhiteSpace(txtStaffPass.Text))
+            {
+                MessageBox.Show("Username and password required.");
+                return;
+            }
+
+            string hash = txtStaffPass.Text;
+            using (System.Security.Cryptography.SHA256 sha256 = System.Security.Cryptography.SHA256.Create())
+            {
+                byte[] bytes = sha256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(txtStaffPass.Text));
+                System.Text.StringBuilder builder = new System.Text.StringBuilder();
+                for (int i = 0; i < bytes.Length; i++) builder.Append(bytes[i].ToString("x2"));
+                hash = builder.ToString();
+            }
+
+            try
+            {
+                DbHelper.ExecuteNonQuery("INSERT INTO admins (username, password_hash) VALUES (@u, @p)",
+                    new MySqlParameter("@u", txtStaffUser.Text.Trim()),
+                    new MySqlParameter("@p", hash));
+                MessageBox.Show("Staff added.");
+                txtStaffUser.Clear(); txtStaffPass.Clear();
+                LoadStaff();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error adding staff (username might exist): " + ex.Message);
+            }
         }
 
         private void LoadEventsData()
@@ -223,6 +266,7 @@ namespace EventManager
                 MessageBox.Show("Event created!");
                 txtTitle.Clear(); txtLocation.Clear(); txtDescription.Clear();
                 LoadEventsData();
+            LoadStaff();
             }
             catch (Exception ex)
             {
@@ -288,12 +332,17 @@ namespace EventManager
             lblTotalReg.Text = $"Total Registered: {totalReg}";
             lblTotalAtt.Text = $"Total Attended: {totalAtt}";
 
-            // Pie chart for ages
+            // Update Bar Chart
+            chartAttendance.Series["Attendance"].Points.Clear();
+            chartAttendance.Series["Attendance"].Points.AddXY("Registered", totalReg);
+            chartAttendance.Series["Attendance"].Points.AddXY("Attended", totalAtt);
+
+            // Pie chart for ages (Doughnut)
             DataTable dtAges = DbHelper.ExecuteQuery("SELECT age, COUNT(*) as cnt FROM attendees WHERE event_id = @e GROUP BY age", new MySqlParameter("@e", eId));
             chartAges.Series["Ages"].Points.Clear();
             foreach (DataRow row in dtAges.Rows)
             {
-                chartAges.Series["Ages"].Points.AddXY($"Age {row["age"]}", row["cnt"]);
+                chartAges.Series["Ages"].Points.AddXY($"{row["age"]} yrs", row["cnt"]);
             }
         }
     }

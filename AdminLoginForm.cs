@@ -79,10 +79,6 @@ namespace EventManager
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new EventHandler(this.BtnLogin_Click);
 
-            // Form Styling
-            this.BackColor = Color.FromArgb(240, 244, 248);
-            this.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-
             // lblTitle
             this.lblTitle.ForeColor = Color.FromArgb(33, 37, 41);
 
@@ -110,6 +106,8 @@ namespace EventManager
             this.Text = "Admin Login";
             this.ResumeLayout(false);
             this.PerformLayout();
+
+            Theme.ApplyToForm(this);
         }
 
         private void BtnLogin_Click(object? sender, EventArgs e)

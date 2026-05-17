@@ -85,6 +85,8 @@ namespace EventManager
             ((System.ComponentModel.ISupportInitialize)(this.picProof)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
+            Theme.ApplyToForm(this);
         }
 
         private void LoadEvents()
