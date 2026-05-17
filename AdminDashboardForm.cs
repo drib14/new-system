@@ -284,8 +284,8 @@ namespace EventManager
                              FROM attendance a
                              JOIN attendees att ON a.attendee_id = att.id
                              WHERE a.event_id = @e AND a.status = 'Pending'";
-            dgvAttendance.DataSource = DbHelper.ExecuteQuery(query, new MySqlParameter("@e", cmbAttEvents.SelectedValue));
             picProofViewer.Image = null;
+            dgvAttendance.DataSource = DbHelper.ExecuteQuery(query, new MySqlParameter("@e", cmbAttEvents.SelectedValue));
         }
 
         private void DgvAttendance_SelectionChanged(object? sender, EventArgs e)
