@@ -129,6 +129,39 @@ namespace EventManager
             tabAnalytics.Controls.Add(lblTotalReg); tabAnalytics.Controls.Add(lblTotalAtt);
             tabAnalytics.Controls.Add(chartAges);
 
+            // Form Styling
+            this.BackColor = Color.FromArgb(240, 244, 248);
+            this.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            this.tabControl.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+
+            // Buttons
+            this.btnCreateEvent.BackColor = Color.FromArgb(0, 123, 255);
+            this.btnCreateEvent.ForeColor = Color.White;
+            this.btnCreateEvent.FlatStyle = FlatStyle.Flat;
+            this.btnCreateEvent.FlatAppearance.BorderSize = 0;
+            this.btnCreateEvent.Cursor = Cursors.Hand;
+
+            this.btnApprove.BackColor = Color.FromArgb(40, 167, 69);
+            this.btnApprove.ForeColor = Color.White;
+            this.btnApprove.FlatStyle = FlatStyle.Flat;
+            this.btnApprove.FlatAppearance.BorderSize = 0;
+            this.btnApprove.Cursor = Cursors.Hand;
+
+            this.btnReject.BackColor = Color.FromArgb(220, 53, 69);
+            this.btnReject.ForeColor = Color.White;
+            this.btnReject.FlatStyle = FlatStyle.Flat;
+            this.btnReject.FlatAppearance.BorderSize = 0;
+            this.btnReject.Cursor = Cursors.Hand;
+
+            // Grids
+            var grids = new[] { dgvEventsAdmin, dgvRegistrations, dgvAttendance };
+            foreach(var g in grids) {
+                g.BackgroundColor = Color.White;
+                g.BorderStyle = BorderStyle.None;
+                g.DefaultCellStyle.SelectionBackColor = Color.FromArgb(0, 123, 255);
+                g.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
+
             // Form
             this.ClientSize = new Size(960, 520);
             this.Controls.Add(this.tabControl);

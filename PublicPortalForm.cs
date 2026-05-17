@@ -69,6 +69,32 @@ namespace EventManager
             this.btnSubmitProof.UseVisualStyleBackColor = true;
             this.btnSubmitProof.Click += new EventHandler(this.BtnSubmitProof_Click);
 
+            // Form Styling
+            this.BackColor = Color.FromArgb(240, 244, 248);
+            this.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+
+            // lblTitle
+            this.lblTitle.ForeColor = Color.FromArgb(33, 37, 41);
+
+            // dgvEvents
+            this.dgvEvents.BackgroundColor = Color.White;
+            this.dgvEvents.BorderStyle = BorderStyle.None;
+            this.dgvEvents.DefaultCellStyle.SelectionBackColor = Color.FromArgb(0, 123, 255);
+
+            // btnRegister
+            this.btnRegister.BackColor = Color.FromArgb(0, 123, 255);
+            this.btnRegister.ForeColor = Color.White;
+            this.btnRegister.FlatStyle = FlatStyle.Flat;
+            this.btnRegister.FlatAppearance.BorderSize = 0;
+            this.btnRegister.Cursor = Cursors.Hand;
+
+            // btnSubmitProof
+            this.btnSubmitProof.BackColor = Color.FromArgb(108, 117, 125);
+            this.btnSubmitProof.ForeColor = Color.White;
+            this.btnSubmitProof.FlatStyle = FlatStyle.Flat;
+            this.btnSubmitProof.FlatAppearance.BorderSize = 0;
+            this.btnSubmitProof.Cursor = Cursors.Hand;
+
             // PublicPortalForm
             this.ClientSize = new Size(782, 403);
             this.Controls.Add(this.btnSubmitProof);

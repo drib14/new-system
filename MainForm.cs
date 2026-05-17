@@ -52,6 +52,27 @@ namespace EventManager
             this.btnAdminLogin.UseVisualStyleBackColor = true;
             this.btnAdminLogin.Click += new EventHandler(this.BtnAdminLogin_Click);
 
+            // Form Styling
+            this.BackColor = Color.FromArgb(240, 244, 248);
+            this.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+
+            // lblTitle
+            this.lblTitle.ForeColor = Color.FromArgb(33, 37, 41);
+
+            // btnPublicPortal
+            this.btnPublicPortal.BackColor = Color.FromArgb(0, 123, 255);
+            this.btnPublicPortal.ForeColor = Color.White;
+            this.btnPublicPortal.FlatStyle = FlatStyle.Flat;
+            this.btnPublicPortal.FlatAppearance.BorderSize = 0;
+            this.btnPublicPortal.Cursor = Cursors.Hand;
+
+            // btnAdminLogin
+            this.btnAdminLogin.BackColor = Color.FromArgb(108, 117, 125);
+            this.btnAdminLogin.ForeColor = Color.White;
+            this.btnAdminLogin.FlatStyle = FlatStyle.Flat;
+            this.btnAdminLogin.FlatAppearance.BorderSize = 0;
+            this.btnAdminLogin.Cursor = Cursors.Hand;
+
             // MainForm
             this.ClientSize = new Size(800, 450);
             this.Controls.Add(this.btnAdminLogin);
