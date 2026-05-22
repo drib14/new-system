@@ -149,6 +149,7 @@ namespace EventManager
                 btnRegister.Enabled = false;
 
                 MessageBox.Show("Registration successful!");
+                this.Close();
             }
             catch (Exception ex)
             {

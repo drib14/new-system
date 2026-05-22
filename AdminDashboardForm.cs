@@ -110,9 +110,9 @@ namespace EventManager
             dgvAttendance.SelectionChanged += DgvAttendance_SelectionChanged;
 
             picProofViewer = new PictureBox() { Location = new Point(530, 60), Width = 400, Height = 350, SizeMode = PictureBoxSizeMode.Zoom, BorderStyle = BorderStyle.FixedSingle };
-            btnApprove = new Button() { Text = "Approve", Location = new Point(530, 420), Width = 100, BackColor = Color.LightGreen };
+            btnApprove = new Button() { Text = "Approve", Location = new Point(530, 420), Width = 100 };
             btnApprove.Click += (s, e) => UpdateAttendanceStatus("Approved");
-            btnReject = new Button() { Text = "Reject", Location = new Point(650, 420), Width = 100, BackColor = Color.LightCoral };
+            btnReject = new Button() { Text = "Reject", Location = new Point(650, 420), Width = 100 };
             btnReject.Click += (s, e) => UpdateAttendanceStatus("Rejected");
 
             tabAttendance.Controls.Add(la); tabAttendance.Controls.Add(cmbAttEvents); tabAttendance.Controls.Add(dgvAttendance);
@@ -120,12 +120,12 @@ namespace EventManager
 
             // --- Analytics Tab Setup ---
             tabAnalytics.Text = "Analytics";
-            Label lan = new Label() { Text = "Select Event:", Location = new Point(10, 20) };
-            cmbAnaEvents = new ComboBox() { Location = new Point(100, 17), Width = 200, DropDownStyle = ComboBoxStyle.DropDownList };
+            Label lan = new Label() { Text = "Select Event:", Location = new Point(10, 20), Width = 100 };
+            cmbAnaEvents = new ComboBox() { Location = new Point(110, 17), Width = 200, DropDownStyle = ComboBoxStyle.DropDownList };
             cmbAnaEvents.SelectedIndexChanged += (s, e) => LoadAnalytics();
 
-            lblTotalReg = new Label() { Location = new Point(10, 60), Width = 300, Font = new Font("Segoe UI Light", 16) };
-            lblTotalAtt = new Label() { Location = new Point(10, 100), Width = 300, Font = new Font("Segoe UI Light", 16) };
+            lblTotalReg = new Label() { Location = new Point(10, 60), Width = 300, Font = new Font("Segoe UI", 12) };
+            lblTotalAtt = new Label() { Location = new Point(10, 100), Width = 300, Font = new Font("Segoe UI", 12) };
 
             // Attendance Bar Chart
             chartAttendance = new Chart() { Location = new Point(10, 150), Width = 400, Height = 300 };
@@ -271,20 +271,26 @@ namespace EventManager
         private void LoadRegistrations()
         {
             if (cmbRegEvents.SelectedValue == null) return;
-            string query = "SELECT id, first_name, last_name, email, age, phone FROM attendees WHERE event_id = @e";
-            dgvRegistrations.DataSource = DbHelper.ExecuteQuery(query, new MySqlParameter("@e", cmbRegEvents.SelectedValue));
+            if (int.TryParse(cmbRegEvents.SelectedValue.ToString(), out int eventId))
+            {
+                string query = "SELECT id, first_name, last_name, email, age, phone FROM attendees WHERE event_id = @e";
+                dgvRegistrations.DataSource = DbHelper.ExecuteQuery(query, new MySqlParameter("@e", eventId));
+            }
         }
 
         private void LoadAttendance()
         {
             if (cmbAttEvents.SelectedValue == null) return;
-            // Only fetch pending attendance to avoid re-approving
-            string query = @"SELECT a.id as AttendanceID, att.first_name, att.last_name, att.email, a.status
-                             FROM attendance a
-                             JOIN attendees att ON a.attendee_id = att.id
-                             WHERE a.event_id = @e AND a.status = 'Pending'";
-            picProofViewer.Image = null;
-            dgvAttendance.DataSource = DbHelper.ExecuteQuery(query, new MySqlParameter("@e", cmbAttEvents.SelectedValue));
+            if (int.TryParse(cmbAttEvents.SelectedValue.ToString(), out int eventId))
+            {
+                // Only fetch pending attendance to avoid re-approving
+                string query = @"SELECT a.id as AttendanceID, att.first_name, att.last_name, att.email, a.status
+                                 FROM attendance a
+                                 JOIN attendees att ON a.attendee_id = att.id
+                                 WHERE a.event_id = @e AND a.status = 'Pending'";
+                picProofViewer.Image = null;
+                dgvAttendance.DataSource = DbHelper.ExecuteQuery(query, new MySqlParameter("@e", eventId));
+            }
         }
 
         private void DgvAttendance_SelectionChanged(object? sender, EventArgs e)
@@ -322,25 +328,26 @@ namespace EventManager
         private void LoadAnalytics()
         {
             if (cmbAnaEvents.SelectedValue == null) return;
-            int eId = Convert.ToInt32(cmbAnaEvents.SelectedValue);
-
-            int totalReg = Convert.ToInt32(DbHelper.ExecuteScalar("SELECT COUNT(*) FROM attendees WHERE event_id = @e", new MySqlParameter("@e", eId)));
-            int totalAtt = Convert.ToInt32(DbHelper.ExecuteScalar("SELECT COUNT(*) FROM attendance WHERE event_id = @e AND status = 'Approved'", new MySqlParameter("@e", eId)));
-
-            lblTotalReg.Text = $"Total Registered: {totalReg}";
-            lblTotalAtt.Text = $"Total Attended: {totalAtt}";
-
-            // Update Bar Chart
-            chartAttendance.Series["Attendance"].Points.Clear();
-            chartAttendance.Series["Attendance"].Points.AddXY("Registered", totalReg);
-            chartAttendance.Series["Attendance"].Points.AddXY("Attended", totalAtt);
-
-            // Pie chart for ages (Doughnut)
-            DataTable dtAges = DbHelper.ExecuteQuery("SELECT age, COUNT(*) as cnt FROM attendees WHERE event_id = @e GROUP BY age", new MySqlParameter("@e", eId));
-            chartAges.Series["Ages"].Points.Clear();
-            foreach (DataRow row in dtAges.Rows)
+            if (int.TryParse(cmbAnaEvents.SelectedValue.ToString(), out int eId))
             {
-                chartAges.Series["Ages"].Points.AddXY($"{row["age"]} yrs", row["cnt"]);
+                int totalReg = Convert.ToInt32(DbHelper.ExecuteScalar("SELECT COUNT(*) FROM attendees WHERE event_id = @e", new MySqlParameter("@e", eId)));
+                int totalAtt = Convert.ToInt32(DbHelper.ExecuteScalar("SELECT COUNT(*) FROM attendance WHERE event_id = @e AND status = 'Approved'", new MySqlParameter("@e", eId)));
+
+                lblTotalReg.Text = $"Total Registered: {totalReg}";
+                lblTotalAtt.Text = $"Total Attended: {totalAtt}";
+
+                // Update Bar Chart
+                chartAttendance.Series["Attendance"].Points.Clear();
+                chartAttendance.Series["Attendance"].Points.AddXY("Registered", totalReg);
+                chartAttendance.Series["Attendance"].Points.AddXY("Attended", totalAtt);
+
+                // Pie chart for ages (Doughnut)
+                DataTable dtAges = DbHelper.ExecuteQuery("SELECT age, COUNT(*) as cnt FROM attendees WHERE event_id = @e GROUP BY age", new MySqlParameter("@e", eId));
+                chartAges.Series["Ages"].Points.Clear();
+                foreach (DataRow row in dtAges.Rows)
+                {
+                    chartAges.Series["Ages"].Points.AddXY($"{row["age"]} yrs", row["cnt"]);
+                }
             }
         }
     }
