@@ -34,10 +34,8 @@ namespace EventManager
 
             // lblTitle
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
-            this.lblTitle.Location = new Point(110, 30);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new Size(181, 37);
+            this.lblTitle.Location = new Point(50, 30);
+            this.lblTitle.Name = "lblTitleAdmin";
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Admin Login";
 
@@ -50,7 +48,7 @@ namespace EventManager
             this.lblUsername.Text = "Username:";
 
             // txtUsername
-            this.txtUsername.Location = new Point(140, 97);
+            this.txtUsername.Location = new Point(150, 97);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new Size(200, 27);
             this.txtUsername.TabIndex = 2;
@@ -64,34 +62,20 @@ namespace EventManager
             this.lblPassword.Text = "Password:";
 
             // txtPassword
-            this.txtPassword.Location = new Point(140, 147);
+            this.txtPassword.Location = new Point(150, 147);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new Size(200, 27);
             this.txtPassword.TabIndex = 4;
 
             // btnLogin
-            this.btnLogin.Location = new Point(140, 200);
+            this.btnLogin.Location = new Point(150, 200);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new Size(100, 35);
             this.btnLogin.TabIndex = 5;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new EventHandler(this.BtnLogin_Click);
-
-            // lblTitle
-            this.lblTitle.ForeColor = Color.FromArgb(33, 37, 41);
-
-            // txt fields
-            this.txtUsername.BorderStyle = BorderStyle.FixedSingle;
-            this.txtPassword.BorderStyle = BorderStyle.FixedSingle;
-
-            // btnLogin
-            this.btnLogin.BackColor = Color.FromArgb(40, 167, 69); // Success Green
-            this.btnLogin.ForeColor = Color.White;
-            this.btnLogin.FlatStyle = FlatStyle.Flat;
-            this.btnLogin.FlatAppearance.BorderSize = 0;
-            this.btnLogin.Cursor = Cursors.Hand;
 
             // AdminLoginForm
             this.ClientSize = new Size(400, 300);

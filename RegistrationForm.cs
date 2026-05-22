@@ -2,7 +2,6 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using MySqlConnector;
-using QRCoder;
 
 namespace EventManager
 {
@@ -23,8 +22,6 @@ namespace EventManager
         private Label lblPhone;
         private TextBox txtPhone;
         private Button btnRegister;
-        private PictureBox picQRCode;
-        private Label lblQRInstruction;
 
         public RegistrationForm(int eventId, string eventTitle)
         {
@@ -48,10 +45,7 @@ namespace EventManager
             this.lblPhone = new Label();
             this.txtPhone = new TextBox();
             this.btnRegister = new Button();
-            this.picQRCode = new PictureBox();
-            this.lblQRInstruction = new Label();
             ((System.ComponentModel.ISupportInitialize)(this.numAge)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picQRCode)).BeginInit();
             this.SuspendLayout();
 
             int startY = 60;
@@ -101,17 +95,7 @@ namespace EventManager
             this.btnRegister.Width = 100;
             this.btnRegister.Click += new EventHandler(this.BtnRegister_Click);
 
-            this.picQRCode.Location = new Point(360, startY);
-            this.picQRCode.Size = new Size(200, 200);
-            this.picQRCode.SizeMode = PictureBoxSizeMode.Zoom;
-            this.picQRCode.BorderStyle = BorderStyle.FixedSingle;
-
-            this.lblQRInstruction.Location = new Point(360, startY + 210);
-            this.lblQRInstruction.Size = new Size(200, 50);
-            this.lblQRInstruction.Text = "Your QR Ticket will appear here. Please save it.";
-            this.lblQRInstruction.TextAlign = ContentAlignment.TopCenter;
-
-            this.ClientSize = new Size(600, 350);
+            this.ClientSize = new Size(350, 350);
             this.Controls.Add(lblTitle);
             this.Controls.Add(lblFirstName);
             this.Controls.Add(txtFirstName);
@@ -124,14 +108,11 @@ namespace EventManager
             this.Controls.Add(lblPhone);
             this.Controls.Add(txtPhone);
             this.Controls.Add(btnRegister);
-            this.Controls.Add(picQRCode);
-            this.Controls.Add(lblQRInstruction);
             this.Name = "RegistrationForm";
             this.StartPosition = FormStartPosition.CenterScreen;
             this.Text = "Event Registration";
 
             ((System.ComponentModel.ISupportInitialize)(this.numAge)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picQRCode)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -146,12 +127,10 @@ namespace EventManager
                 return;
             }
 
-            string qrText = $"EVENT:{_eventId}|EMAIL:{txtEmail.Text.Trim()}|TS:{DateTime.Now.Ticks}";
-
             try
             {
-                string query = @"INSERT INTO attendees (event_id, first_name, last_name, email, age, phone, qr_code_text)
-                                 VALUES (@eventId, @fName, @lName, @email, @age, @phone, @qrText)";
+                string query = @"INSERT INTO attendees (event_id, first_name, last_name, email, age, phone)
+                                 VALUES (@eventId, @fName, @lName, @email, @age, @phone)";
 
                 MySqlParameter[] parameters = {
                     new MySqlParameter("@eventId", _eventId),
@@ -159,22 +138,14 @@ namespace EventManager
                     new MySqlParameter("@lName", txtLastName.Text.Trim()),
                     new MySqlParameter("@email", txtEmail.Text.Trim()),
                     new MySqlParameter("@age", numAge.Value),
-                    new MySqlParameter("@phone", txtPhone.Text.Trim()),
-                    new MySqlParameter("@qrText", qrText)
+                    new MySqlParameter("@phone", txtPhone.Text.Trim())
                 };
 
                 DbHelper.ExecuteNonQuery(query, parameters);
 
-                // Generate QR Code
-                QRCodeGenerator qrGenerator = new QRCodeGenerator();
-                QRCodeData qrCodeData = qrGenerator.CreateQrCode(qrText, QRCodeGenerator.ECCLevel.Q);
-                QRCode qrCode = new QRCode(qrCodeData);
-                Bitmap qrCodeImage = qrCode.GetGraphic(20);
-
-                picQRCode.Image = qrCodeImage;
                 btnRegister.Enabled = false;
 
-                MessageBox.Show("Registration successful! Please save your QR Code.");
+                MessageBox.Show("Registration successful!");
             }
             catch (Exception ex)
             {

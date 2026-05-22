@@ -29,10 +29,8 @@ namespace EventManager
 
             // lblTitle
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
             this.lblTitle.Location = new Point(20, 20);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new Size(236, 37);
+            this.lblTitle.Name = "lblTitleEvents";
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Upcoming Events";
 
@@ -44,13 +42,11 @@ namespace EventManager
             this.dgvEvents.Name = "dgvEvents";
             this.dgvEvents.ReadOnly = true;
             this.dgvEvents.RowHeadersWidth = 51;
-            this.dgvEvents.RowTemplate.Height = 29;
             this.dgvEvents.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             this.dgvEvents.Size = new Size(740, 250);
             this.dgvEvents.TabIndex = 1;
 
             // btnRegister
-            this.btnRegister.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             this.btnRegister.Location = new Point(20, 340);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new Size(180, 40);
@@ -60,36 +56,13 @@ namespace EventManager
             this.btnRegister.Click += new EventHandler(this.BtnRegister_Click);
 
             // btnSubmitProof
-            this.btnSubmitProof.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             this.btnSubmitProof.Location = new Point(220, 340);
             this.btnSubmitProof.Name = "btnSubmitProof";
             this.btnSubmitProof.Size = new Size(200, 40);
             this.btnSubmitProof.TabIndex = 3;
-            this.btnSubmitProof.Text = "Submit Attendance Proof";
+            this.btnSubmitProof.Text = "Submit Proof";
             this.btnSubmitProof.UseVisualStyleBackColor = true;
             this.btnSubmitProof.Click += new EventHandler(this.BtnSubmitProof_Click);
-
-            // lblTitle
-            this.lblTitle.ForeColor = Color.FromArgb(33, 37, 41);
-
-            // dgvEvents
-            this.dgvEvents.BackgroundColor = Color.White;
-            this.dgvEvents.BorderStyle = BorderStyle.None;
-            this.dgvEvents.DefaultCellStyle.SelectionBackColor = Color.FromArgb(0, 123, 255);
-
-            // btnRegister
-            this.btnRegister.BackColor = Color.FromArgb(0, 123, 255);
-            this.btnRegister.ForeColor = Color.White;
-            this.btnRegister.FlatStyle = FlatStyle.Flat;
-            this.btnRegister.FlatAppearance.BorderSize = 0;
-            this.btnRegister.Cursor = Cursors.Hand;
-
-            // btnSubmitProof
-            this.btnSubmitProof.BackColor = Color.FromArgb(108, 117, 125);
-            this.btnSubmitProof.ForeColor = Color.White;
-            this.btnSubmitProof.FlatStyle = FlatStyle.Flat;
-            this.btnSubmitProof.FlatAppearance.BorderSize = 0;
-            this.btnSubmitProof.Cursor = Cursors.Hand;
 
             // PublicPortalForm
             this.ClientSize = new Size(782, 403);

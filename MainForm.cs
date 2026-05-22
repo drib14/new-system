@@ -24,50 +24,29 @@ namespace EventManager
 
             // lblTitle
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point);
-            this.lblTitle.Location = new Point(50, 40); // Shifted to left slightly for better reading
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new Size(528, 54);
+            this.lblTitle.Location = new Point(50, 40);
+            this.lblTitle.Name = "lblTitleMain";
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Event Management System";
-            this.lblTitle.TextAlign = ContentAlignment.MiddleCenter;
+            this.lblTitle.TextAlign = ContentAlignment.MiddleLeft;
 
             // btnPublicPortal
-            this.btnPublicPortal.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            this.btnPublicPortal.Location = new Point(276, 150);
+            this.btnPublicPortal.Location = new Point(50, 150);
             this.btnPublicPortal.Name = "btnPublicPortal";
-            this.btnPublicPortal.Size = new Size(250, 60);
+            this.btnPublicPortal.Size = new Size(300, 60);
             this.btnPublicPortal.TabIndex = 1;
             this.btnPublicPortal.Text = "Public Portal (Attendees)";
             this.btnPublicPortal.UseVisualStyleBackColor = true;
             this.btnPublicPortal.Click += new EventHandler(this.BtnPublicPortal_Click);
 
             // btnAdminLogin
-            this.btnAdminLogin.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            this.btnAdminLogin.Location = new Point(276, 240);
+            this.btnAdminLogin.Location = new Point(50, 240);
             this.btnAdminLogin.Name = "btnAdminLogin";
-            this.btnAdminLogin.Size = new Size(250, 60);
+            this.btnAdminLogin.Size = new Size(300, 60);
             this.btnAdminLogin.TabIndex = 2;
             this.btnAdminLogin.Text = "Admin Login (Organizers)";
             this.btnAdminLogin.UseVisualStyleBackColor = true;
             this.btnAdminLogin.Click += new EventHandler(this.BtnAdminLogin_Click);
-
-            // lblTitle
-            this.lblTitle.ForeColor = Color.FromArgb(33, 37, 41);
-
-            // btnPublicPortal
-            this.btnPublicPortal.BackColor = Color.FromArgb(0, 123, 255);
-            this.btnPublicPortal.ForeColor = Color.White;
-            this.btnPublicPortal.FlatStyle = FlatStyle.Flat;
-            this.btnPublicPortal.FlatAppearance.BorderSize = 0;
-            this.btnPublicPortal.Cursor = Cursors.Hand;
-
-            // btnAdminLogin
-            this.btnAdminLogin.BackColor = Color.FromArgb(108, 117, 125);
-            this.btnAdminLogin.ForeColor = Color.White;
-            this.btnAdminLogin.FlatStyle = FlatStyle.Flat;
-            this.btnAdminLogin.FlatAppearance.BorderSize = 0;
-            this.btnAdminLogin.Cursor = Cursors.Hand;
 
             // MainForm
             this.ClientSize = new Size(800, 450);
@@ -86,8 +65,7 @@ namespace EventManager
 
         private void MainForm_Resize(object? sender, EventArgs e)
         {
-            btnPublicPortal.Left = (this.ClientSize.Width - btnPublicPortal.Width) / 2;
-            btnAdminLogin.Left = (this.ClientSize.Width - btnAdminLogin.Width) / 2;
+            // Removed centering logic to allow left-aligned minimalist design
         }
 
         private void BtnPublicPortal_Click(object? sender, EventArgs e)

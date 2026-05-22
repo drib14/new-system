@@ -31,7 +31,6 @@ CREATE TABLE IF NOT EXISTS attendees (
     email VARCHAR(100) NOT NULL,
     age INT NOT NULL,
     phone VARCHAR(20) NOT NULL,
-    qr_code_text VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE
 );

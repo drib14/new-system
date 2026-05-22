@@ -39,38 +39,38 @@ namespace EventManager
             this.lblEmail.Location = new Point(20, 20);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Text = "Your Registered Email:";
-            this.lblEmail.Width = 150;
+            this.lblEmail.Width = 180;
 
-            this.txtEmail.Location = new Point(180, 17);
+            this.txtEmail.Location = new Point(210, 17);
             this.txtEmail.Width = 200;
 
             this.lblEvent.Location = new Point(20, 60);
             this.lblEvent.Name = "lblEvent";
             this.lblEvent.Text = "Select Event:";
-            this.lblEvent.Width = 150;
+            this.lblEvent.Width = 180;
 
-            this.cmbEvents.Location = new Point(180, 57);
+            this.cmbEvents.Location = new Point(210, 57);
             this.cmbEvents.Width = 200;
             this.cmbEvents.DropDownStyle = ComboBoxStyle.DropDownList;
 
             this.btnSelectImage.Location = new Point(20, 100);
             this.btnSelectImage.Name = "btnSelectImage";
             this.btnSelectImage.Text = "Select Proof Image";
-            this.btnSelectImage.Width = 150;
+            this.btnSelectImage.Width = 180;
             this.btnSelectImage.Click += new EventHandler(this.BtnSelectImage_Click);
 
-            this.picProof.Location = new Point(20, 140);
-            this.picProof.Size = new Size(360, 200);
+            this.picProof.Location = new Point(20, 150);
+            this.picProof.Size = new Size(390, 200);
             this.picProof.SizeMode = PictureBoxSizeMode.Zoom;
             this.picProof.BorderStyle = BorderStyle.FixedSingle;
 
-            this.btnSubmit.Location = new Point(180, 360);
+            this.btnSubmit.Location = new Point(210, 370);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Text = "Submit Attendance";
             this.btnSubmit.Width = 200;
             this.btnSubmit.Click += new EventHandler(this.BtnSubmit_Click);
 
-            this.ClientSize = new Size(420, 420);
+            this.ClientSize = new Size(450, 450);
             this.Controls.Add(lblEmail);
             this.Controls.Add(txtEmail);
             this.Controls.Add(lblEvent);
