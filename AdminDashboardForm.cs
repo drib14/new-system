@@ -70,17 +70,17 @@ namespace EventManager
 
             // --- Events Tab Setup ---
             this.tabEvents.Text = "Manage Events";
-            Label l1 = new Label() { Text = "Title:", Location = new Point(10, 20) };
-            txtTitle = new TextBox() { Location = new Point(100, 17), Width = 200 };
-            Label l2 = new Label() { Text = "Date:", Location = new Point(10, 60) };
-            dtpDate = new DateTimePicker() { Location = new Point(100, 57), Width = 200, Format = DateTimePickerFormat.Short };
-            Label l3 = new Label() { Text = "Time:", Location = new Point(10, 100) };
-            dtpTime = new DateTimePicker() { Location = new Point(100, 97), Width = 200, Format = DateTimePickerFormat.Time, ShowUpDown = true };
-            Label l4 = new Label() { Text = "Location:", Location = new Point(10, 140) };
-            txtLocation = new TextBox() { Location = new Point(100, 137), Width = 200 };
-            Label l5 = new Label() { Text = "Desc:", Location = new Point(10, 180) };
-            txtDescription = new TextBox() { Location = new Point(100, 177), Width = 200, Multiline = true, Height = 60 };
-            btnCreateEvent = new Button() { Text = "Create Event", Location = new Point(100, 250), Width = 120 };
+            Label l1 = new Label() { Text = "Title:", Location = new Point(10, 20), Width = 100 };
+            txtTitle = new TextBox() { Location = new Point(110, 17), Width = 200 };
+            Label l2 = new Label() { Text = "Date:", Location = new Point(10, 60), Width = 100 };
+            dtpDate = new DateTimePicker() { Location = new Point(110, 57), Width = 200, Format = DateTimePickerFormat.Short };
+            Label l3 = new Label() { Text = "Time:", Location = new Point(10, 100), Width = 100 };
+            dtpTime = new DateTimePicker() { Location = new Point(110, 97), Width = 200, Format = DateTimePickerFormat.Time, ShowUpDown = true };
+            Label l4 = new Label() { Text = "Location:", Location = new Point(10, 140), Width = 100 };
+            txtLocation = new TextBox() { Location = new Point(110, 137), Width = 200 };
+            Label l5 = new Label() { Text = "Desc:", Location = new Point(10, 180), Width = 100 };
+            txtDescription = new TextBox() { Location = new Point(110, 177), Width = 200, Multiline = true, Height = 60 };
+            btnCreateEvent = new Button() { Text = "Create Event", Location = new Point(110, 250), Width = 200 };
             btnCreateEvent.Click += BtnCreateEvent_Click;
 
             dgvEventsAdmin = new DataGridView() { Location = new Point(330, 20), Width = 600, Height = 450, ReadOnly = true, AllowUserToAddRows = false, SelectionMode = DataGridViewSelectionMode.FullRowSelect };
@@ -95,16 +95,16 @@ namespace EventManager
 
             // --- Registrations Tab Setup ---
             tabRegistrations.Text = "Registrations";
-            Label lr = new Label() { Text = "Select Event:", Location = new Point(10, 20) };
-            cmbRegEvents = new ComboBox() { Location = new Point(100, 17), Width = 200, DropDownStyle = ComboBoxStyle.DropDownList };
+            Label lr = new Label() { Text = "Select Event:", Location = new Point(10, 20), Width = 100 };
+            cmbRegEvents = new ComboBox() { Location = new Point(110, 17), Width = 200, DropDownStyle = ComboBoxStyle.DropDownList };
             cmbRegEvents.SelectedIndexChanged += (s, e) => LoadRegistrations();
             dgvRegistrations = new DataGridView() { Location = new Point(10, 60), Width = 920, Height = 400, ReadOnly = true, AllowUserToAddRows = false, SelectionMode = DataGridViewSelectionMode.FullRowSelect };
             tabRegistrations.Controls.Add(lr); tabRegistrations.Controls.Add(cmbRegEvents); tabRegistrations.Controls.Add(dgvRegistrations);
 
             // --- Attendance Tab Setup ---
             tabAttendance.Text = "Approve Attendance";
-            Label la = new Label() { Text = "Select Event:", Location = new Point(10, 20) };
-            cmbAttEvents = new ComboBox() { Location = new Point(100, 17), Width = 200, DropDownStyle = ComboBoxStyle.DropDownList };
+            Label la = new Label() { Text = "Select Event:", Location = new Point(10, 20), Width = 100 };
+            cmbAttEvents = new ComboBox() { Location = new Point(110, 17), Width = 200, DropDownStyle = ComboBoxStyle.DropDownList };
             cmbAttEvents.SelectedIndexChanged += (s, e) => LoadAttendance();
             dgvAttendance = new DataGridView() { Location = new Point(10, 60), Width = 500, Height = 400, ReadOnly = true, AllowUserToAddRows = false, SelectionMode = DataGridViewSelectionMode.FullRowSelect };
             dgvAttendance.SelectionChanged += DgvAttendance_SelectionChanged;
@@ -151,14 +151,14 @@ namespace EventManager
 
             // --- Staff Tab Setup ---
             tabStaff.Text = "Manage Staff";
-            Label ls1 = new Label() { Text = "Username:", Location = new Point(10, 20) };
-            txtStaffUser = new TextBox() { Location = new Point(100, 17), Width = 150 };
-            Label ls2 = new Label() { Text = "Password:", Location = new Point(270, 20) };
-            txtStaffPass = new TextBox() { Location = new Point(350, 17), Width = 150, PasswordChar = '*' };
-            btnAddStaff = new Button() { Text = "Add Staff", Location = new Point(520, 15), Width = 100 };
+            Label ls1 = new Label() { Text = "Username:", Location = new Point(10, 20), Width = 100 };
+            txtStaffUser = new TextBox() { Location = new Point(110, 17), Width = 180 };
+            Label ls2 = new Label() { Text = "Password:", Location = new Point(310, 20), Width = 100 };
+            txtStaffPass = new TextBox() { Location = new Point(410, 17), Width = 180, PasswordChar = '*' };
+            btnAddStaff = new Button() { Text = "Add Staff", Location = new Point(610, 15), Width = 120 };
             btnAddStaff.Click += BtnAddStaff_Click;
 
-            dgvStaff = new DataGridView() { Location = new Point(10, 60), Width = 920, Height = 400, ReadOnly = true, AllowUserToAddRows = false, SelectionMode = DataGridViewSelectionMode.FullRowSelect };
+            dgvStaff = new DataGridView() { Location = new Point(10, 80), Width = 920, Height = 380, ReadOnly = true, AllowUserToAddRows = false, SelectionMode = DataGridViewSelectionMode.FullRowSelect };
 
             tabStaff.Controls.Add(ls1); tabStaff.Controls.Add(txtStaffUser);
             tabStaff.Controls.Add(ls2); tabStaff.Controls.Add(txtStaffPass);
@@ -261,7 +261,6 @@ namespace EventManager
                 MessageBox.Show("Event created!");
                 txtTitle.Clear(); txtLocation.Clear(); txtDescription.Clear();
                 LoadEventsData();
-            LoadStaff();
             }
             catch (Exception ex)
             {

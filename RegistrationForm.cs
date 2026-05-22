@@ -52,50 +52,53 @@ namespace EventManager
             int gap = 40;
 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             this.lblTitle.Location = new Point(20, 15);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new Size(130, 28);
+            this.lblTitle.Name = "lblTitleReg";
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Register for Event";
 
             this.lblFirstName.Location = new Point(20, startY);
             this.lblFirstName.Name = "lblFirstName";
             this.lblFirstName.Text = "First Name:";
-            this.txtFirstName.Location = new Point(120, startY - 3);
-            this.txtFirstName.Width = 200;
+            this.lblFirstName.Width = 100;
+            this.txtFirstName.Location = new Point(140, startY - 3);
+            this.txtFirstName.Width = 220;
 
             this.lblLastName.Location = new Point(20, startY + gap);
             this.lblLastName.Name = "lblLastName";
             this.lblLastName.Text = "Last Name:";
-            this.txtLastName.Location = new Point(120, startY + gap - 3);
-            this.txtLastName.Width = 200;
+            this.lblLastName.Width = 100;
+            this.txtLastName.Location = new Point(140, startY + gap - 3);
+            this.txtLastName.Width = 220;
 
             this.lblEmail.Location = new Point(20, startY + 2 * gap);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Text = "Email:";
-            this.txtEmail.Location = new Point(120, startY + 2 * gap - 3);
-            this.txtEmail.Width = 200;
+            this.lblEmail.Width = 100;
+            this.txtEmail.Location = new Point(140, startY + 2 * gap - 3);
+            this.txtEmail.Width = 220;
 
             this.lblAge.Location = new Point(20, startY + 3 * gap);
             this.lblAge.Name = "lblAge";
             this.lblAge.Text = "Age:";
-            this.numAge.Location = new Point(120, startY + 3 * gap - 3);
+            this.lblAge.Width = 100;
+            this.numAge.Location = new Point(140, startY + 3 * gap - 3);
             this.numAge.Width = 80;
 
             this.lblPhone.Location = new Point(20, startY + 4 * gap);
             this.lblPhone.Name = "lblPhone";
             this.lblPhone.Text = "Phone:";
-            this.txtPhone.Location = new Point(120, startY + 4 * gap - 3);
-            this.txtPhone.Width = 200;
+            this.lblPhone.Width = 100;
+            this.txtPhone.Location = new Point(140, startY + 4 * gap - 3);
+            this.txtPhone.Width = 220;
 
-            this.btnRegister.Location = new Point(120, startY + 5 * gap);
+            this.btnRegister.Location = new Point(140, startY + 5 * gap);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Text = "Register";
-            this.btnRegister.Width = 100;
+            this.btnRegister.Width = 220;
             this.btnRegister.Click += new EventHandler(this.BtnRegister_Click);
 
-            this.ClientSize = new Size(350, 350);
+            this.ClientSize = new Size(380, 380);
             this.Controls.Add(lblTitle);
             this.Controls.Add(lblFirstName);
             this.Controls.Add(txtFirstName);
