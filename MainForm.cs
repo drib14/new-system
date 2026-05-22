@@ -40,7 +40,7 @@ namespace EventManager
             this.btnPublicPortal.Click += new EventHandler(this.BtnPublicPortal_Click);
 
             // btnAdminLogin
-            this.btnAdminLogin.Location = new Point(50, 240);
+            this.btnAdminLogin.Location = new Point(370, 150);
             this.btnAdminLogin.Name = "btnAdminLogin";
             this.btnAdminLogin.Size = new Size(300, 60);
             this.btnAdminLogin.TabIndex = 2;
@@ -65,7 +65,13 @@ namespace EventManager
 
         private void MainForm_Resize(object? sender, EventArgs e)
         {
-            // Removed centering logic to allow left-aligned minimalist design
+            int totalWidth = btnPublicPortal.Width + 20 + btnAdminLogin.Width;
+            int startX = (this.ClientSize.Width - totalWidth) / 2;
+
+            btnPublicPortal.Left = startX;
+            btnAdminLogin.Left = startX + btnPublicPortal.Width + 20;
+
+            lblTitle.Left = (this.ClientSize.Width - lblTitle.Width) / 2;
         }
 
         private void BtnPublicPortal_Click(object? sender, EventArgs e)

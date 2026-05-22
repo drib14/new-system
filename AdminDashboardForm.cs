@@ -344,9 +344,18 @@ namespace EventManager
                 // Pie chart for ages (Doughnut)
                 DataTable dtAges = DbHelper.ExecuteQuery("SELECT age, COUNT(*) as cnt FROM attendees WHERE event_id = @e GROUP BY age", new MySqlParameter("@e", eId));
                 chartAges.Series["Ages"].Points.Clear();
-                foreach (DataRow row in dtAges.Rows)
+
+                if (dtAges.Rows.Count > 0)
                 {
-                    chartAges.Series["Ages"].Points.AddXY($"{row["age"]} yrs", row["cnt"]);
+                    foreach (DataRow row in dtAges.Rows)
+                    {
+                        chartAges.Series["Ages"].Points.AddXY($"{row["age"]} yrs", row["cnt"]);
+                    }
+                }
+                else
+                {
+                    chartAges.Series["Ages"].Points.AddXY("No Data", 1);
+                    chartAges.Series["Ages"].Points[0].Color = Color.LightGray;
                 }
             }
         }
