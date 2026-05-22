@@ -65,13 +65,22 @@ namespace EventManager
 
         private void MainForm_Resize(object? sender, EventArgs e)
         {
+            // Vertical alignment: Title taking up upper portion, buttons in middle.
+            // Total height to center block:
+            int totalHeight = lblTitle.Height + 50 + btnPublicPortal.Height;
+            int startY = (this.ClientSize.Height - totalHeight) / 2;
+
+            lblTitle.Top = startY;
+            lblTitle.Left = (this.ClientSize.Width - lblTitle.Width) / 2;
+
             int totalWidth = btnPublicPortal.Width + 20 + btnAdminLogin.Width;
             int startX = (this.ClientSize.Width - totalWidth) / 2;
 
+            btnPublicPortal.Top = startY + lblTitle.Height + 50;
             btnPublicPortal.Left = startX;
-            btnAdminLogin.Left = startX + btnPublicPortal.Width + 20;
 
-            lblTitle.Left = (this.ClientSize.Width - lblTitle.Width) / 2;
+            btnAdminLogin.Top = startY + lblTitle.Height + 50;
+            btnAdminLogin.Left = startX + btnPublicPortal.Width + 20;
         }
 
         private void BtnPublicPortal_Click(object? sender, EventArgs e)

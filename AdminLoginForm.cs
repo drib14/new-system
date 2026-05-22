@@ -101,7 +101,7 @@ namespace EventManager
 
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("Please enter both username and password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMessageBoxForm.Show("Please enter both username and password.", "Error", true);
                 return;
             }
 
@@ -130,19 +130,19 @@ namespace EventManager
 
                 if (count > 0)
                 {
-                    MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CustomMessageBoxForm.Show("Login successful!", "Success");
                     AdminDashboardForm dashboard = new AdminDashboardForm();
                     dashboard.Show();
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Invalid username or password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    CustomMessageBoxForm.Show("Invalid username or password.", "Error", true);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CustomMessageBoxForm.Show("Database error: " + ex.Message, "Error", true);
             }
         }
     }

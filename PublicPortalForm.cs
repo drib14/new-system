@@ -90,7 +90,7 @@ namespace EventManager
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading events: " + ex.Message, "Error");
+                CustomMessageBoxForm.Show("Error loading events: " + ex.Message, "Error", true);
             }
         }
 
@@ -106,7 +106,7 @@ namespace EventManager
             }
             else
             {
-                MessageBox.Show("Please select an event from the list to register.");
+                CustomMessageBoxForm.Show("Please select an event from the list to register.");
             }
         }
 

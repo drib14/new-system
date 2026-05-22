@@ -100,7 +100,7 @@ namespace EventManager
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading events: " + ex.Message);
+                CustomMessageBoxForm.Show("Error loading events: " + ex.Message);
             }
         }
 
@@ -121,7 +121,7 @@ namespace EventManager
         {
             if (string.IsNullOrWhiteSpace(txtEmail.Text) || cmbEvents.SelectedValue == null || _imageBytes == null)
             {
-                MessageBox.Show("Please enter email, select an event, and upload an image.");
+                CustomMessageBoxForm.Show("Please enter email, select an event, and upload an image.");
                 return;
             }
 
@@ -135,7 +135,7 @@ namespace EventManager
 
                 if (attendeeIdObj == null)
                 {
-                    MessageBox.Show("Could not find a registration with this email for the selected event.");
+                    CustomMessageBoxForm.Show("Could not find a registration with this email for the selected event.");
                     return;
                 }
 
@@ -150,12 +150,12 @@ namespace EventManager
                     new MySqlParameter("@eventId", cmbEvents.SelectedValue),
                     new MySqlParameter("@img", _imageBytes));
 
-                MessageBox.Show("Proof submitted successfully! It is pending admin approval.");
+                CustomMessageBoxForm.Show("Proof submitted successfully! It is pending admin approval.");
                 this.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error submitting proof: " + ex.Message);
+                CustomMessageBoxForm.Show("Error submitting proof: " + ex.Message);
             }
         }
     }

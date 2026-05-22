@@ -126,7 +126,7 @@ namespace EventManager
         {
             if (string.IsNullOrWhiteSpace(txtFirstName.Text) || string.IsNullOrWhiteSpace(txtLastName.Text) || string.IsNullOrWhiteSpace(txtEmail.Text))
             {
-                MessageBox.Show("Please fill in all required fields (Name, Email).");
+                CustomMessageBoxForm.Show("Please fill in all required fields (Name, Email).");
                 return;
             }
 
@@ -148,12 +148,12 @@ namespace EventManager
 
                 btnRegister.Enabled = false;
 
-                MessageBox.Show("Registration successful!");
+                CustomMessageBoxForm.Show("Registration successful!");
                 this.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error registering: " + ex.Message, "Error");
+                CustomMessageBoxForm.Show("Error registering: " + ex.Message, "Error", true);
             }
         }
     }
