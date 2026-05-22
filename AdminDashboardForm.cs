@@ -83,11 +83,11 @@ namespace EventManager
             Label l5 = new Label() { Text = "Desc:", Location = new Point(10, 180), Width = 100 };
             txtDescription = new TextBox() { Location = new Point(110, 177), Width = 200, Multiline = true, Height = 60 };
 
-            btnCreateEvent = new Button() { Text = "Create", Location = new Point(20, 250), Width = 90 };
+            btnCreateEvent = new Button() { Text = "Create", Location = new Point(20, 250), Width = 100 };
             btnCreateEvent.Click += BtnCreateEvent_Click;
-            btnUpdateEvent = new Button() { Text = "Update", Location = new Point(120, 250), Width = 90 };
+            btnUpdateEvent = new Button() { Text = "Update", Location = new Point(130, 250), Width = 100 };
             btnUpdateEvent.Click += BtnUpdateEvent_Click;
-            btnDeleteEvent = new Button() { Text = "Delete", Location = new Point(220, 250), Width = 90 };
+            btnDeleteEvent = new Button() { Text = "Delete", Location = new Point(240, 250), Width = 100 };
             btnDeleteEvent.Click += BtnDeleteEvent_Click;
 
             dgvEventsAdmin = new DataGridView() { Location = new Point(330, 20), Width = 600, Height = 450, ReadOnly = true, AllowUserToAddRows = false, SelectionMode = DataGridViewSelectionMode.FullRowSelect };
@@ -107,20 +107,20 @@ namespace EventManager
             cmbRegEvents = new ComboBox() { Location = new Point(110, 17), Width = 200, DropDownStyle = ComboBoxStyle.DropDownList };
             cmbRegEvents.SelectedIndexChanged += (s, e) => LoadRegistrations();
 
-            Label rf = new Label() { Text = "First Name:", Location = new Point(330, 20), Width = 80 };
+            Label rf = new Label() { Text = "First Name:", Location = new Point(330, 20), Width = 100 };
             txtRegFName = new TextBox() { Location = new Point(410, 17), Width = 120 };
-            Label rl = new Label() { Text = "Last Name:", Location = new Point(540, 20), Width = 80 };
+            Label rl = new Label() { Text = "Last Name:", Location = new Point(540, 20), Width = 100 };
             txtRegLName = new TextBox() { Location = new Point(620, 17), Width = 120 };
-            Label re = new Label() { Text = "Email:", Location = new Point(330, 60), Width = 80 };
+            Label re = new Label() { Text = "Email:", Location = new Point(330, 60), Width = 100 };
             txtRegEmail = new TextBox() { Location = new Point(410, 57), Width = 120 };
-            Label rp = new Label() { Text = "Phone:", Location = new Point(540, 60), Width = 80 };
+            Label rp = new Label() { Text = "Phone:", Location = new Point(540, 60), Width = 100 };
             txtRegPhone = new TextBox() { Location = new Point(620, 57), Width = 120 };
             Label ra = new Label() { Text = "Age:", Location = new Point(760, 20), Width = 40 };
             numRegAge = new NumericUpDown() { Location = new Point(800, 17), Width = 60 };
 
-            btnUpdateReg = new Button() { Text = "Update", Location = new Point(750, 55), Width = 80 };
+            btnUpdateReg = new Button() { Text = "Update", Location = new Point(750, 55), Width = 100 };
             btnUpdateReg.Click += BtnUpdateReg_Click;
-            btnDeleteReg = new Button() { Text = "Delete", Location = new Point(840, 55), Width = 80 };
+            btnDeleteReg = new Button() { Text = "Delete", Location = new Point(860, 55), Width = 100 };
             btnDeleteReg.Click += BtnDeleteReg_Click;
 
             dgvRegistrations = new DataGridView() { Location = new Point(10, 100), Width = 920, Height = 360, ReadOnly = true, AllowUserToAddRows = false, SelectionMode = DataGridViewSelectionMode.FullRowSelect };
@@ -159,11 +159,11 @@ namespace EventManager
             Label ls2 = new Label() { Text = "Password:", Location = new Point(270, 20), Width = 100 };
             txtStaffPass = new TextBox() { Location = new Point(370, 17), Width = 150, PasswordChar = '*' };
 
-            btnAddStaff = new Button() { Text = "Add", Location = new Point(540, 15), Width = 90 };
+            btnAddStaff = new Button() { Text = "Add", Location = new Point(540, 15), Width = 100 };
             btnAddStaff.Click += BtnAddStaff_Click;
-            btnUpdateStaff = new Button() { Text = "Update", Location = new Point(640, 15), Width = 90 };
+            btnUpdateStaff = new Button() { Text = "Update", Location = new Point(650, 15), Width = 100 };
             btnUpdateStaff.Click += BtnUpdateStaff_Click;
-            btnDeleteStaff = new Button() { Text = "Delete", Location = new Point(740, 15), Width = 90 };
+            btnDeleteStaff = new Button() { Text = "Delete", Location = new Point(760, 15), Width = 100 };
             btnDeleteStaff.Click += BtnDeleteStaff_Click;
 
             dgvStaff = new DataGridView() { Location = new Point(10, 80), Width = 920, Height = 380, ReadOnly = true, AllowUserToAddRows = false, SelectionMode = DataGridViewSelectionMode.FullRowSelect };
